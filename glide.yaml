@@ -1,0 +1,6 @@
+package: github.com/ghost
+import:
+- package: golang.org/x/net/context
+- package: github.com/onsi/ginkgo
+- package: github.com/onsi/gomega
+- package: gopkg.in/yaml.v2

@@ -1,0 +1,14 @@
+hash: 37bc54d0368d0a04a038044e2777472ec891918cf37f9e449741b60ac38a434c
+updated: 2017-02-06T23:38:11.733284903-08:00
+imports:
+- name: github.com/onsi/ginkgo
+  version: bb93381d543b0e5725244abe752214a110791d01
+- name: github.com/onsi/gomega
+  version: e85f63af4302dc0e4277c6008ecf803f1d80e4f0
+- name: golang.org/x/net
+  version: 236b8f043b920452504e263bc21d354427127473
+  subpackages:
+  - context
+- name: gopkg.in/yaml.v2
+  version: 4c78c975fe7c825c6d1466c42be594d1d6f3aba6
+devImports: []
