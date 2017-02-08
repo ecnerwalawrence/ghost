@@ -2,6 +2,7 @@ package main
 
 import (
 	"math/rand"
+	"os"
 	"strings"
 )
 
@@ -21,7 +22,12 @@ func GetCorpus() Corpus {
 		return corpusSingleton
 	}
 
-	corpusSingleton = NewCorpusV1()
+	if os.Getenv("CORPUS") == "1" {
+		corpusSingleton = NewCorpusV1()
+	} else {
+		corpusSingleton = NewCorpusV2()
+	}
+
 	return corpusSingleton
 }
 
@@ -60,11 +66,12 @@ func (c CorpusV1) IsAWord(prefix string) bool {
 }
 
 type CorpusV2 struct {
-	trie map[string]interface{}
+	trie  map[string]interface{}
+	words []string
 }
 
 func NewCorpusV2() *CorpusV2 {
-	corpus := CorpusV2{trie: map[string]interface{}{}}
+	corpus := CorpusV2{trie: map[string]interface{}{}, words: []string{}}
 	words := []string{"apple", "appletree", "word", "work"}
 	for _, w := range words {
 		corpus.BuildTrie(w)
@@ -91,26 +98,14 @@ func (c *CorpusV2) BuildTrie(word string) {
 	} else if mLvl2, ok := c.trie[word].(map[byte]string); ok {
 		mLvl2[0] = word
 	}
+	c.words = append(c.words, word)
 }
 
 // Recurses through the Trie
 func (c CorpusV2) FindAWord(prefix string) string {
 	if prefix == "" {
-		i := 0
-		index := rand.Intn(len(c.trie))
-		for _, w := range c.trie {
-			if i <= index {
-				i++
-				continue
-			}
-			_, word := c.getByteMap(w)
-			if word == "" {
-				i++
-				continue
-			}
-			return word
-		}
-		return ""
+		index := rand.Intn(len(c.words) - 1)
+		return c.words[index]
 	}
 
 	w := c.trie[prefix]

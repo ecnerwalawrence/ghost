@@ -37,7 +37,11 @@ make setup
 <pre>
 make test
 </pre>
-9. Run ghost
+9. Run ghost (version 1 of corpus)
+<pre>
+CORPUS=1 ./ghost
+</pre>
+10. Run ghost (version 2 of corpus)
 <pre>
 ./ghost
 </pre>

@@ -108,7 +108,7 @@ var _ = Describe("TestCorpus", func() {
 
 		Context("When using version 2", func() {
 			BeforeEach(func() {
-				corpus2 := CorpusV2{trie: map[string]interface{}{}}
+				corpus2 := *(NewCorpusV2())
 				corpus2.BuildTrie("apple")
 				corpus2.BuildTrie("appletree")
 				corpus = &corpus2
@@ -122,7 +122,7 @@ var _ = Describe("TestCorpus", func() {
 		Context("When word not exists", func() {
 			Context("When using version 2", func() {
 				BeforeEach(func() {
-					corpus2 := CorpusV2{trie: map[string]interface{}{}}
+					corpus2 := *(NewCorpusV2())
 					corpus2.BuildTrie("apple")
 					corpus = &corpus2
 					word = "peanuts"
@@ -140,7 +140,7 @@ var _ = Describe("TestCorpus", func() {
 		var corpus2 CorpusV2
 
 		BeforeEach(func() {
-			corpus2 = CorpusV2{trie: map[string]interface{}{}}
+			corpus2 = CorpusV2{trie: map[string]interface{}{}, words: []string{}}
 			expectedTrie = map[string]interface{}{
 				"a": map[byte]string{
 					'b': "ab",
